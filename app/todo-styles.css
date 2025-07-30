@@ -1,0 +1,319 @@
+/* CSS переменные для тем */
+:root {
+  /* Темная тема (по умолчанию) */
+  --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  --text-color: white;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-color: white;
+  --input-placeholder: rgba(255, 255, 255, 0.7);
+  --item-bg: rgba(255, 255, 255, 0.1);
+  --item-hover-bg: rgba(255, 255, 255, 0.15);
+  --edit-input-bg: rgba(255, 255, 255, 0.2);
+  --empty-state-bg: rgba(255, 255, 255, 0.05);
+  --empty-state-border: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --scrollbar-track: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb: rgba(139, 92, 246, 0.5);
+  --scrollbar-thumb-hover: rgba(139, 92, 246, 0.7);
+}
+
+/* Светлая тема */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --text-color: #1e293b;
+    --input-bg: rgba(0, 0, 0, 0.05);
+    --input-color: #1e293b;
+    --input-placeholder: rgba(0, 0, 0, 0.5);
+    --item-bg: rgba(0, 0, 0, 0.05);
+    --item-hover-bg: rgba(0, 0, 0, 0.08);
+    --edit-input-bg: rgba(0, 0, 0, 0.1);
+    --empty-state-bg: rgba(0, 0, 0, 0.03);
+    --empty-state-border: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --scrollbar-track: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(139, 92, 246, 0.3);
+    --scrollbar-thumb-hover: rgba(139, 92, 246, 0.5);
+  }
+}
+
+/* Основные стили для Todo приложения */
+
+.todo-container {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+  padding: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.todo-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.todo-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: var(--text-shadow);
+}
+
+.todo-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.todo-input-section {
+  margin-bottom: 30px;
+}
+
+.todo-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--input-bg);
+  color: var(--input-color);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px var(--shadow-color);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.todo-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.todo-button-group {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.todo-button {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #8B5CF6;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.todo-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.todo-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.todo-button.delete {
+  background-color: #EF4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  margin-left: 15px;
+  min-width: 80px;
+  flex: none;
+}
+
+.todo-button.delete:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.todo-section {
+  margin-bottom: 30px;
+}
+
+.todo-section-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: var(--text-shadow);
+}
+
+.todo-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--empty-state-bg);
+  border-radius: 12px;
+  border: 2px dashed var(--empty-state-border);
+  transition: all 0.3s ease;
+}
+
+.todo-empty-text {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  padding: 15px 20px;
+  background-color: var(--item-bg);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px var(--shadow-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  background-color: var(--item-hover-bg);
+}
+
+.todo-text {
+  font-size: 16px;
+  flex: 1;
+  word-break: break-word;
+}
+
+.todo-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #7C3AED;
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-fab:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+}
+
+.todo-fab:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.todo-error {
+  color: red;
+  text-align: center;
+  padding: 20px;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для редактирования задач */
+.todo-edit-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--edit-input-bg);
+  color: var(--input-color);
+  outline: none;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.todo-edit-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.todo-button.edit {
+  background-color: #10B981;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  margin-left: 10px;
+  min-width: 70px;
+  flex: none;
+}
+
+.todo-button.edit:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.todo-button.cancel {
+  background-color: #6B7280;
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+  margin-left: 10px;
+  min-width: 70px;
+  flex: none;
+}
+
+.todo-button.cancel:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4);
+}
+
+.todo-item.editing {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .todo-container {
+    padding: 15px;
+  }
+  
+  .todo-title {
+    font-size: 2rem;
+  }
+  
+  .todo-button-group {
+    flex-direction: column;
+  }
+  
+  .todo-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-container {
+    padding: 10px;
+  }
+  
+  .todo-title {
+    font-size: 1.8rem;
+  }
+  
+  .todo-input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .todo-button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+} 
