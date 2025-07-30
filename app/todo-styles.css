@@ -1,6 +1,5 @@
-/* CSS переменные для тем */
 :root {
-  /* Темная тема (по умолчанию) */
+  
   --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   --text-color: white;
   --input-bg: rgba(255, 255, 255, 0.1);
@@ -18,7 +17,6 @@
   --scrollbar-thumb-hover: rgba(139, 92, 246, 0.7);
 }
 
-/* Светлая тема */
 @media (prefers-color-scheme: light) {
   :root {
     --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -39,7 +37,6 @@
   }
 }
 
-/* Основные стили для Todo приложения */
 
 .todo-container {
   min-height: 100vh;
@@ -226,7 +223,6 @@
   justify-content: center;
 }
 
-/* Стили для редактирования задач */
 .todo-edit-input {
   flex: 1;
   padding: 8px 12px;
@@ -275,7 +271,7 @@
   border: 2px solid rgba(16, 185, 129, 0.3);
 }
 
-/* Адаптивность для мобильных устройств */
+
 @media (max-width: 768px) {
   .todo-container {
     padding: 15px;
