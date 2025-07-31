@@ -280,6 +280,3 @@ todo_project/
 - **`app/todo-styles.css`** - Стили с поддержкой тем
 - **`api/api.ts`** - API функции для работы с бэкендом
 - **`models/task.tsx`** - Типы и интерфейсы
-
-![Made with Love](https://img.shields.io/badge/Made%20with-Love-red?style=for-the-badge)
-![Open Source](https://img.shields.io/badge/Open%20Source-Yes-green?style=for-the-badge)
