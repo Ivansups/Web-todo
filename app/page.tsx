@@ -6,7 +6,7 @@ import "./todo-styles.css";
 
 interface Task {
   id: number;
-  task: string;
+  Task: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -138,7 +138,7 @@ export default function Home() {
   // Функция для начала редактирования задачи
   const handleStartEdit = (task: Task) => {
     setEditingId(task.id)
-    setEditingText(task.task)
+    setEditingText(task.Task)
   }
 
   // Функция для сохранения изменений
@@ -154,7 +154,7 @@ export default function Home() {
       // Обновляем локальное состояние
       setTasks(tasks.map(task => 
         task.id === editingId 
-          ? { ...task, task: editingText.trim() }
+          ? { ...task, Task: editingText.trim() }
           : task
       ))
       
@@ -307,7 +307,7 @@ export default function Home() {
                     // Обычный режим просмотра
                     <>
                       <span className="todo-text">
-                        {task.task}
+                        {task.Task}
                       </span>
                       <button 
                         onClick={() => handleStartEdit(task)}

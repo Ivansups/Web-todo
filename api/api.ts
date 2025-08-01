@@ -2,24 +2,12 @@ import { request } from "https"
 
 // Функция для получения базового URL API
 function getApiBaseUrl(): string {
-  // В браузере проверяем, есть ли переменная окружения
+  // В браузере всегда используем localhost для API
   if (typeof window !== 'undefined') {
-    // Используем переменную окружения или определяем автоматически
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    if (apiUrl) {
-      return apiUrl;
-    }
-    
-    // Если приложение запущено на том же устройстве, используем localhost
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return 'http://localhost:8000';
-    }
-    // Если приложение открыто с другого устройства, используем IP ПК
-    // Замените на реальный IP адрес вашего ПК
-    return 'http://192.168.0.126:8000';
+    return 'http://localhost:8000';
   }
   
-  // На сервере используем переменную окружения или localhost
+  // На сервере используем переменную окружения для внутренней связи
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 }
 
