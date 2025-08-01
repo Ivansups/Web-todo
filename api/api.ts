@@ -1,15 +1,39 @@
 import { request } from "https"
 
+// Функция для получения базового URL API
+function getApiBaseUrl(): string {
+  // В браузере проверяем, есть ли переменная окружения
+  if (typeof window !== 'undefined') {
+    // Используем переменную окружения или определяем автоматически
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (apiUrl) {
+      return apiUrl;
+    }
+    
+    // Если приложение запущено на том же устройстве, используем localhost
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:8000';
+    }
+    // Если приложение открыто с другого устройства, используем IP ПК
+    // Замените на реальный IP адрес вашего ПК
+    return 'http://192.168.0.126:8000';
+  }
+  
+  // На сервере используем переменную окружения или localhost
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 export async function functionGetAllUsers() {
-    const res = await fetch("http://localhost:8000/tasks/get_all_tasks")
+    const res = await fetch(`${API_BASE_URL}/tasks/get_all_tasks`)
     if (!res.ok) throw new Error("OSHIBKA BLAT!")
     return res.json()
 }
 
 export async function functionCreateTask(task: {Task: string;}) {
   try {
-    const res = await fetch("http://localhost:8000/tasks/create_task", {
+    const res = await fetch(`${API_BASE_URL}/tasks/create_task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -40,7 +64,7 @@ export async function functionCreateTask(task: {Task: string;}) {
 
 export async function functionDeleteTask(id: number) {
   try {
-    const res = await fetch(`http://localhost:8000/tasks/delete_task_by_id/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/tasks/delete_task_by_id/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -69,7 +93,7 @@ export async function functionDeleteTask(id: number) {
 
 export async function functionUpdateTask(id: number, updatedTask: {Task: string}) {
   try {
-    const res = await fetch(`http://localhost:8000/tasks/update_task_by_id/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/tasks/update_task_by_id/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -95,16 +119,16 @@ export async function functionUpdateTask(id: number, updatedTask: {Task: string}
 
 export async function testAllEndpoints() {
   const endpoints = [
-    "http://localhost:8000/tasks/get_all_tasks",
-    "http://localhost:8000/tasks/create_task", 
-    "http://localhost:8000/tasks/delete_task_by_id",
-    "http://localhost:8000/tasks/delete",
-    "http://localhost:8000/tasks/remove",
-    "http://localhost:8000/tasks/remove_task",
-    "http://localhost:8000/task/delete",
-    "http://localhost:8000/task/remove",
-    "http://localhost:8000/api/tasks/delete",
-    "http://localhost:8000/api/tasks/remove"
+    `${API_BASE_URL}/tasks/get_all_tasks`,
+    `${API_BASE_URL}/tasks/create_task`, 
+    `${API_BASE_URL}/tasks/delete_task_by_id`,
+    `${API_BASE_URL}/tasks/delete`,
+    `${API_BASE_URL}/tasks/remove`,
+    `${API_BASE_URL}/tasks/remove_task`,
+    `${API_BASE_URL}/task/delete`,
+    `${API_BASE_URL}/task/remove`,
+    `${API_BASE_URL}/api/tasks/delete`,
+    `${API_BASE_URL}/api/tasks/remove`
   ];
 
   console.log("🔍 Тестируем все возможные эндпоинты...");

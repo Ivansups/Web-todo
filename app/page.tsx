@@ -4,8 +4,15 @@ import { functionGetAllUsers, functionCreateTask, functionDeleteTask, functionUp
 import { useEffect, useState } from "react";
 import "./todo-styles.css";
 
+interface Task {
+  id: number;
+  task: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export default function Home() {
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState("");
   const [newTaskText, setNewTaskText] = useState("")
   const [isAdding, setIsAdding] = useState(false)
@@ -22,7 +29,7 @@ export default function Home() {
         console.log("Ответ от API:", data);
         setTasks(data);
       })
-      .catch((e: any) => setError(e.message));
+      .catch((error: Error) => setError(error.message));
   }, []);
 
   // Определяем тему по умолчанию при загрузке
@@ -48,8 +55,8 @@ export default function Home() {
         const updatedTasks = await functionGetAllUsers()
         setTasks(updatedTasks)
         console.log("Автоматическое обновление списка задач")
-      } catch (e) {
-        console.error("Ошибка при автоматическом обновлении:", e)
+      } catch (error) {
+        console.error("Ошибка при автоматическом обновлении:", error)
       }
     }, 30000); // 30 секунд
 
@@ -129,9 +136,9 @@ export default function Home() {
   }
 
   // Функция для начала редактирования задачи
-  const handleStartEdit = (task: any) => {
+  const handleStartEdit = (task: Task) => {
     setEditingId(task.id)
-    setEditingText(task.Task)
+    setEditingText(task.task)
   }
 
   // Функция для сохранения изменений
@@ -147,7 +154,7 @@ export default function Home() {
       // Обновляем локальное состояние
       setTasks(tasks.map(task => 
         task.id === editingId 
-          ? { ...task, Task: editingText.trim() }
+          ? { ...task, task: editingText.trim() }
           : task
       ))
       
@@ -264,7 +271,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="todo-list">
-              {tasks.map((task: any) => (
+              {tasks.map((task: Task) => (
                 <div key={task.id} className={`todo-item ${editingId === task.id ? 'editing' : ''}`}>
                   {editingId === task.id ? (
                     // Режим редактирования
@@ -300,7 +307,7 @@ export default function Home() {
                     // Обычный режим просмотра
                     <>
                       <span className="todo-text">
-                        {task.Task}
+                        {task.task}
                       </span>
                       <button 
                         onClick={() => handleStartEdit(task)}

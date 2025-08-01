@@ -1,0 +1,30 @@
+# Зависимости
+node_modules
+npm-debug.log*
+
+# Сборка
+.next
+out
+
+# Логи
+*.log
+
+# Переменные окружения
+.env*
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db 
